@@ -1,0 +1,7 @@
+bin/
+obj/
+package/
+.DS_Store
+*.user
+*.suo
+*.pdb
