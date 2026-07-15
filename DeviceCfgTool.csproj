@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>DeviceCfgTool</AssemblyName>
+    <RootNamespace>CfgUtility</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="payload/files/**/*" Link="files/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="CreateRuntimePayloadDirectories" AfterTargets="Build;Publish">
+    <MakeDir Directories="$(OutDir)files/swp;$(OutDir)files/win" />
+    <MakeDir Directories="$(PublishDir)files/swp;$(PublishDir)files/win" Condition="'$(PublishDir)' != ''" />
+  </Target>
+</Project>
